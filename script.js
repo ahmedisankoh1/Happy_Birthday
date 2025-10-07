@@ -28,8 +28,11 @@ function toggleAccordion(sectionNumber) {
 }
 
 // Confetti and hearts animation
+let confettiInterval;
+
 function createConfetti() {
     const container = document.getElementById('confetti-container');
+    const isMobile = window.innerWidth <= 768;
     
     // Create hearts
     function createHeart() {
@@ -39,6 +42,12 @@ function createConfetti() {
         heart.style.left = Math.random() * 100 + '%';
         heart.style.animationDelay = Math.random() * 2 + 's';
         heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+        
+        // Smaller size on mobile for better performance
+        if (isMobile) {
+            heart.style.fontSize = '16px';
+        }
+        
         container.appendChild(heart);
         
         // Remove heart after animation
@@ -58,7 +67,11 @@ function createConfetti() {
         piece.style.left = Math.random() * 100 + '%';
         piece.style.animationDelay = Math.random() * 2 + 's';
         piece.style.animationDuration = (Math.random() * 2 + 3) + 's';
-        piece.style.fontSize = (Math.random() * 10 + 15) + 'px';
+        
+        // Adjust size for mobile
+        const size = isMobile ? (Math.random() * 6 + 12) : (Math.random() * 10 + 15);
+        piece.style.fontSize = size + 'px';
+        
         container.appendChild(piece);
         
         // Remove piece after animation
@@ -69,17 +82,21 @@ function createConfetti() {
         }, 5000);
     }
     
-    // Generate confetti continuously
-    setInterval(() => {
+    // Generate confetti continuously with mobile optimization
+    const interval = isMobile ? 1000 : 800; // Slower on mobile
+    confettiInterval = setInterval(() => {
         createHeart();
         createConfettiPiece();
         
-        // Occasionally create multiple pieces at once
-        if (Math.random() < 0.3) {
+        // Occasionally create multiple pieces at once (less frequent on mobile)
+        const multipleChance = isMobile ? 0.2 : 0.3;
+        if (Math.random() < multipleChance) {
             setTimeout(() => createConfettiPiece(), 100);
-            setTimeout(() => createHeart(), 200);
+            if (!isMobile) {
+                setTimeout(() => createHeart(), 200);
+            }
         }
-    }, 800);
+    }, interval);
 }
 
 // Initialize confetti when page loads
@@ -90,15 +107,34 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add smooth scroll behavior for better user experience
     document.documentElement.style.scrollBehavior = 'smooth';
     
-    // Add click animation to accordion headers
+    // Improve mobile scrolling
+    if ('scrollBehavior' in document.documentElement.style) {
+        document.documentElement.style.scrollBehavior = 'smooth';
+    }
+    
+    // Add click animation to accordion headers with better mobile support
     const headers = document.querySelectorAll('.accordion-header');
     headers.forEach(header => {
+        // Remove hover effects on touch devices
+        if ('ontouchstart' in window) {
+            header.style.filter = 'none';
+        }
+        
         header.addEventListener('click', function() {
             // Add a small scale animation on click
             this.style.transform = 'scale(0.98)';
             setTimeout(() => {
                 this.style.transform = 'scale(1)';
             }, 100);
+        });
+        
+        // Add touch feedback
+        header.addEventListener('touchstart', function() {
+            this.style.opacity = '0.8';
+        });
+        
+        header.addEventListener('touchend', function() {
+            this.style.opacity = '1';
         });
     });
     
@@ -125,6 +161,21 @@ document.addEventListener('DOMContentLoaded', function() {
         title.style.opacity = '1';
         title.style.transform = 'translateY(0)';
     }, 200);
+    
+    // Optimize confetti for mobile performance
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+        // Reduce confetti frequency on mobile for better performance
+        clearInterval(confettiInterval);
+        confettiInterval = setInterval(() => {
+            if (Math.random() < 0.7) { // Reduce frequency
+                createHeart();
+            }
+            if (Math.random() < 0.5) {
+                createConfettiPiece();
+            }
+        }, 1200); // Slower interval
+    }
 });
 
 // Add keyboard navigation support for accessibility

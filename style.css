@@ -5,6 +5,13 @@
     box-sizing: border-box;
 }
 
+/* Mobile-first optimizations */
+html {
+    -webkit-text-size-adjust: 100%; /* Prevents text zoom on orientation change */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 body {
     font-family: 'Georgia', 'Times New Roman', serif;
     line-height: 1.6;
@@ -12,6 +19,20 @@ body {
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    touch-action: pan-y; /* Allows vertical scrolling but prevents horizontal */
+}
+
+/* Improve touch interactions */
+button, .accordion-header {
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+/* Prevent zoom on double tap */
+* {
+    touch-action: manipulation;
 }
 
 /* Confetti animation */
@@ -72,6 +93,49 @@ body {
     text-align: center;
     margin-bottom: 40px;
     padding: 20px 0;
+}
+
+/* Hero image placeholder */
+.hero-image-container {
+    margin-bottom: 30px;
+}
+
+.hero-image-placeholder {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffc0cb, #ffb6c1, #ffd1dc);
+    border: 4px solid #ff69b4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 25px rgba(255, 105, 180, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-image-placeholder:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 35px rgba(255, 105, 180, 0.4);
+}
+
+.hero-image-placeholder::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: rotate(45deg);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
 }
 
 .main-title {
@@ -145,10 +209,17 @@ body {
     align-items: center;
     transition: all 0.3s ease;
     user-select: none;
+    touch-action: manipulation; /* Improves touch responsiveness */
+    -webkit-tap-highlight-color: transparent; /* Removes blue highlight on mobile */
+    min-height: 70px; /* Ensures good touch target size */
 }
 
 .accordion-header:hover {
     filter: brightness(1.05);
+}
+
+.accordion-header:active {
+    transform: scale(0.98);
 }
 
 .accordion-header h2 {
@@ -185,6 +256,96 @@ body {
 .accordion-body {
     padding: 25px;
     animation: fadeIn 0.5s ease-in;
+}
+
+/* Content with image layout */
+.content-with-image {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.image-placeholder {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-placeholder:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.image-placeholder-content {
+    text-align: center;
+    color: #555;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 2;
+    position: relative;
+}
+
+.image-icon {
+    display: block;
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.text-content {
+    flex: 1;
+}
+
+/* Individual image placeholder themes */
+.gentle-heart {
+    background: linear-gradient(135deg, #ffc0cb, #ffb6c1);
+    border: 2px solid #ff69b4;
+}
+
+.kitchen-queen {
+    background: linear-gradient(135deg, #ffd700, #ffec8c);
+    border: 2px solid #daa520;
+}
+
+.big-heart {
+    background: linear-gradient(135deg, #e6e6fa, #dda0dd);
+    border: 2px solid #9370db;
+}
+
+.us-together {
+    background: linear-gradient(135deg, #98fb98, #90ee90);
+    border: 2px solid #32cd32;
+}
+
+.birthday-wish {
+    background: linear-gradient(135deg, #ffcba4, #ffdab9);
+    border: 2px solid #ff8c69;
+}
+
+/* Add shimmer effect to image placeholders */
+.image-placeholder::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: rotate(45deg);
+    animation: shimmer 4s infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image-placeholder:hover::before {
+    opacity: 1;
 }
 
 @keyframes fadeIn {
@@ -231,54 +392,210 @@ body {
 /* Responsive design */
 @media (max-width: 768px) {
     .container {
-        padding: 15px;
+        padding: 10px;
+        max-width: 100%;
     }
     
     .main-title {
-        font-size: 2rem;
-        margin-bottom: 15px;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        line-height: 1.3;
+        padding: 0 10px;
+    }
+    
+    .hero-image-placeholder {
+        width: 140px;
+        height: 140px;
+        margin-bottom: 25px;
+    }
+    
+    .accordion-item {
+        margin-bottom: 12px;
     }
     
     .accordion-header {
-        padding: 15px;
+        padding: 18px 15px;
+        min-height: 60px;
     }
     
     .accordion-header h2 {
+        font-size: 1.25rem;
+        line-height: 1.3;
+    }
+    
+    .accordion-icon {
         font-size: 1.3rem;
+        min-width: 30px;
+        text-align: center;
     }
     
     .accordion-body {
-        padding: 20px;
+        padding: 20px 15px;
+    }
+    
+    .content-with-image {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .image-placeholder {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 15px auto;
+    }
+    
+    .image-icon {
+        font-size: 1.5rem;
+    }
+    
+    .image-placeholder-content {
+        font-size: 0.75rem;
+    }
+    
+    .text-content {
+        width: 100%;
     }
     
     .accordion-body p {
-        font-size: 1rem;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        text-align: left;
+    }
+    
+    .footer {
+        padding: 25px 0;
+        margin-top: 30px;
     }
     
     .footer p {
         font-size: 1.1rem;
+        padding: 0 15px;
     }
 }
 
 @media (max-width: 480px) {
+    body {
+        font-size: 16px; /* Prevents zoom on input focus */
+    }
+    
     .container {
-        padding: 10px;
+        padding: 8px;
+    }
+    
+    .header {
+        margin-bottom: 25px;
+        padding: 15px 0;
     }
     
     .main-title {
-        font-size: 1.7rem;
+        font-size: 1.6rem;
+        margin-bottom: 15px;
+        line-height: 1.2;
+        padding: 0 8px;
+    }
+    
+    .hero-image-placeholder {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 20px;
+    }
+    
+    .accordion-container {
+        margin-bottom: 25px;
+    }
+    
+    .accordion-item {
+        margin-bottom: 10px;
+        border-radius: 12px;
     }
     
     .accordion-header {
-        padding: 12px;
+        padding: 15px 12px;
+        min-height: 55px;
     }
     
     .accordion-header h2 {
+        font-size: 1.1rem;
+        line-height: 1.2;
+    }
+    
+    .accordion-icon {
         font-size: 1.2rem;
+        min-width: 25px;
     }
     
     .accordion-body {
-        padding: 15px;
+        padding: 18px 12px;
+    }
+    
+    .content-with-image {
+        gap: 12px;
+    }
+    
+    .image-placeholder {
+        width: 85px;
+        height: 85px;
+        margin-bottom: 12px;
+    }
+    
+    .image-icon {
+        font-size: 1.3rem;
+    }
+    
+    .image-placeholder-content {
+        font-size: 0.7rem;
+    }
+    
+    .accordion-body p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 12px;
+    }
+    
+    .footer {
+        padding: 20px 0;
+        margin-top: 25px;
+    }
+    
+    .footer p {
+        font-size: 1rem;
+        padding: 0 12px;
+    }
+}
+
+/* Extra small screens (very small phones) */
+@media (max-width: 360px) {
+    .main-title {
+        font-size: 1.4rem;
+        padding: 0 5px;
+    }
+    
+    .hero-image-placeholder {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .accordion-header {
+        padding: 12px 10px;
+    }
+    
+    .accordion-header h2 {
+        font-size: 1rem;
+    }
+    
+    .accordion-body {
+        padding: 15px 10px;
+    }
+    
+    .image-placeholder {
+        width: 75px;
+        height: 75px;
+    }
+    
+    .image-icon {
+        font-size: 1.1rem;
     }
     
     .accordion-body p {
