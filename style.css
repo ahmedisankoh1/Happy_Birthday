@@ -1,0 +1,323 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    line-height: 1.6;
+    background: linear-gradient(135deg, #fde2e4 0%, #fad0c4 50%, #ffd1dc 100%);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Confetti animation */
+.confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.confetti {
+    position: absolute;
+    animation: fall 3s linear infinite;
+}
+
+.heart {
+    color: #ff69b4;
+    font-size: 20px;
+    animation: heartFloat 4s ease-in-out infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes heartFloat {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateY(-20px) rotate(10deg);
+        opacity: 1;
+    }
+}
+
+/* Main container */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px 0;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    color: #8b4f8b;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    0% {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    100% {
+        text-shadow: 2px 2px 8px rgba(139, 79, 139, 0.3);
+    }
+}
+
+/* Accordion container */
+.accordion-container {
+    margin-bottom: 40px;
+}
+
+/* Accordion items */
+.accordion-item {
+    margin-bottom: 15px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.accordion-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Color themes for each section */
+.accordion-item[data-color="pink"] .accordion-header {
+    background: linear-gradient(135deg, #ffc0cb, #ffb6c1);
+    border-left: 5px solid #ff69b4;
+}
+
+.accordion-item[data-color="gold"] .accordion-header {
+    background: linear-gradient(135deg, #ffd700, #ffec8c);
+    border-left: 5px solid #daa520;
+}
+
+.accordion-item[data-color="lavender"] .accordion-header {
+    background: linear-gradient(135deg, #e6e6fa, #dda0dd);
+    border-left: 5px solid #9370db;
+}
+
+.accordion-item[data-color="mint"] .accordion-header {
+    background: linear-gradient(135deg, #98fb98, #90ee90);
+    border-left: 5px solid #32cd32;
+}
+
+.accordion-item[data-color="peach"] .accordion-header {
+    background: linear-gradient(135deg, #ffcba4, #ffdab9);
+    border-left: 5px solid #ff8c69;
+}
+
+/* Accordion header */
+.accordion-header {
+    padding: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.accordion-header:hover {
+    filter: brightness(1.05);
+}
+
+.accordion-header h2 {
+    font-size: 1.5rem;
+    color: #444;
+    margin: 0;
+    font-weight: 600;
+}
+
+.accordion-icon {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #666;
+    transition: transform 0.3s ease;
+}
+
+.accordion-icon.active {
+    transform: rotate(45deg);
+}
+
+/* Accordion content */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.accordion-content.active {
+    max-height: 500px;
+    transition: max-height 0.4s ease-in;
+}
+
+.accordion-body {
+    padding: 25px;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.accordion-body p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.7;
+}
+
+.accordion-body p:last-child {
+    margin-bottom: 0;
+}
+
+.accordion-body strong {
+    color: #8b4f8b;
+    font-weight: 700;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 40px;
+}
+
+.footer p {
+    font-size: 1.2rem;
+    color: #8b4f8b;
+    font-style: italic;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .main-title {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+    
+    .accordion-header {
+        padding: 15px;
+    }
+    
+    .accordion-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .accordion-body {
+        padding: 20px;
+    }
+    
+    .accordion-body p {
+        font-size: 1rem;
+    }
+    
+    .footer p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .main-title {
+        font-size: 1.7rem;
+    }
+    
+    .accordion-header {
+        padding: 12px;
+    }
+    
+    .accordion-header h2 {
+        font-size: 1.2rem;
+    }
+    
+    .accordion-body {
+        padding: 15px;
+    }
+    
+    .accordion-body p {
+        font-size: 0.95rem;
+    }
+}
+
+/* Additional decorative elements */
+.container::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(255, 182, 193, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+    z-index: -1;
+}
+
+.container::after {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, rgba(221, 160, 221, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 4s ease-in-out infinite reverse;
+    z-index: -1;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
