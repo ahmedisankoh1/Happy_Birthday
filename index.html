@@ -6,12 +6,32 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <title>Happy Birthday Mum</title>
+    <meta name="theme-color" content="#f9c5d1">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="images/hero-image.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <title>Happy Birthday Emily (Embily🤪) – Queen of Food, Drip & Davido!</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="bg-gradient"></div>
+    <div class="bg-orbs">
+        <span></span><span></span><span></span>
+    </div>
+    <div class="scroll-progress" id="scroll-progress"></div>
+
     <!-- Confetti animation container -->
     <div class="confetti-container" id="confetti-container"></div>
+    <button class="audio-toggle" id="audio-toggle" aria-pressed="false">
+        <span class="audio-icon" id="audio-icon">🔇</span>
+        <span class="audio-label" id="audio-label">Play song</span>
+    </button>
+    <audio id="bg-audio" preload="auto" loop>
+        <source src="audio/happy-birthday.mp3" type="audio/mpeg">
+        Your browser does not support the audio element. Add audio/happy-birthday.mp3
+    </audio>
     
     <!-- Main content -->
     <div class="container">
@@ -20,15 +40,75 @@
             <!-- Hero image placeholder -->
             <div class="hero-image-container">
                 <div class="hero-image-placeholder">
-                    <img src="images/hero-image.jpg" alt="Beautiful photo of Mum" class="hero-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img src="birthday/Wishes.jpeg" alt="Beautiful photo of Embily🤪" class="hero-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="image-placeholder-content fallback-content">
                         <span class="image-icon">📸</span>
                         <p>Add hero-image.jpg</p>
                     </div>
                 </div>
             </div>
-            <h1 class="main-title">🎂 Happy Birthday to the Sweetest Mum Ever 💖</h1>
+            <h1 class="main-title">🎂 Happy Birthday to my ultimate foodie buddy, drip queen, and Davido stan for life!!🫂</h1>
         </header>
+
+        <section class="hero-card glass-card">
+            <div class="hero-card__text">
+                <p class="eyebrow">Celebrating you today and every day, Emily!</p>
+                <h2 class="hero-card__title">You light up every room with style, humor, and that unstoppable energy only you have.</h2>
+                <p class="hero-card__body">This little space is a snapshot of the laughs, food runs, selfies, and all the vibes we’ve shared. Tap, linger, smile, and feel all the love wrapped up just for you.</p>
+                <div class="chip-row">
+                    <span class="chip">Mood Swings (in style 😎)</span>
+                    <span class="chip">Eating Out Champ 🍕</span>
+                    <span class="chip">Endless Laughs 😂</span>
+                    <span class="chip">Drip Certified 👗</span>
+                </div>
+                <div class="cta-row">
+                    <a class="cta primary" href="#content-1">Open the wishes</a>
+                    <button class="cta ghost" id="share-btn">Share this moment</button>
+                    <button class="cta ghost" id="install-btn" hidden>Add to Home Screen</button>
+                </div>
+            </div>
+            <div class="hero-card__badge">
+                <div class="pulse-ring"></div>
+                <div class="badge-content">
+                    <span>Today</span>
+                    <strong>Legendary</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="highlight-strip glass-card">
+            <div class="highlight-header">
+                <p class="eyebrow">Little previews of your legendary vibes</p>
+                <h3>Moments we’re celebrating today</h3>
+            </div>
+            <div class="highlight-track" aria-label="Photo highlights">
+                <div class="highlight-card">
+                    <img src="birthday/big heart.jpeg" alt="Gentle heart preview" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-mini">💝</div>
+                    <p>Gentle Heart❤️</p>
+                </div>
+                <div class="highlight-card">
+                    <img src="birthday/foodie.png" alt="foodie preview" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-mini">👩‍🍳</div>
+                    <p>Foodie Queen 🍔</p>
+                </div>
+                <div class="highlight-card">
+                    <img src="birthday/Wishes.jpeg" alt="Acts of kindness preview" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-mini">💖</div>
+                    <p>Big Heart ❤️</p>
+                </div>
+                <div class="highlight-card">
+                    <img src="birthday/bestie energy.jpeg" alt="Us together preview" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-mini">👩‍👧</div>
+                    <p>Bestie Energy 🤪</p>
+                </div>
+                <div class="highlight-card">
+                    <img src="birthday/drip queen.jpeg" alt="Birthday wish preview" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-mini">🌟</div>
+                    <p>Birthday Wishes 🌟</p>
+                </div>
+            </div>
+        </section>
 
         <!-- Accordion sections -->
         <div class="accordion-container">
@@ -49,7 +129,7 @@
                                 </div>
                             </div>
                             <div class="text-content">
-                                <p>Mum, you have the gentlest soul I know. Your care, your patience, and the way you make everyone feel safe around you — it's something special. You don't just love people; you heal them with your kindness.</p>
+                                <p>Emily, you’re the kind of friend who makes everyone feel like a VIP. Your laughter heals, your jokes slay, and your heart… honestly, your heart is big enough to fit the whole campus inside it.</p>
                             </div>
                         </div>
                     </div>
@@ -59,7 +139,7 @@
             <!-- Section 2 -->
             <div class="accordion-item" data-color="gold">
                 <div class="accordion-header" onclick="toggleAccordion(2)">
-                    <h2>The Queen of the Kitchen</h2>
+                    <h2>Foodie Queen</h2>
                     <span class="accordion-icon" id="icon-2">+</span>
                 </div>
                 <div class="accordion-content" id="content-2">
@@ -73,7 +153,7 @@
                                 </div>
                             </div>
                             <div class="text-content">
-                                <p>You cook like it's an art form. Every meal you make carries love in every bite. From your special dishes to your everyday meals, you somehow make food taste like home and comfort mixed together.</p>
+                                <p>You don’t cook, but girl, you eat like a true foodie. From fancy spots to street food adventures, you make every bite legendary. If food had a fan club, you’d be president.</p>
                             </div>
                         </div>
                     </div>
@@ -83,7 +163,7 @@
             <!-- Section 3 -->
             <div class="accordion-item" data-color="lavender">
                 <div class="accordion-header" onclick="toggleAccordion(3)">
-                    <h2>Your Big Heart</h2>
+                    <h2>Big Heart & Boss Energy</h2>
                     <span class="accordion-icon" id="icon-3">+</span>
                 </div>
                 <div class="accordion-content" id="content-3">
@@ -97,7 +177,7 @@
                                 </div>
                             </div>
                             <div class="text-content">
-                                <p>You're always ready to help others, even when you're tired. You've taught me that true strength is found in compassion, and that kindness is the most powerful thing a person can give.</p>
+                                <p>Even with your mood swings (don’t worry, we love them), you’re always there for your people. Your energy, generosity, and go-getter vibe are goals. You’re a boss in every sense, Emily.</p>
                             </div>
                         </div>
                     </div>
@@ -107,7 +187,7 @@
             <!-- Section 4 -->
             <div class="accordion-item" data-color="mint">
                 <div class="accordion-header" onclick="toggleAccordion(4)">
-                    <h2>Us</h2>
+                    <h2>Us (Buddy Energy)</h2>
                     <span class="accordion-icon" id="icon-4">+</span>
                 </div>
                 <div class="accordion-content" id="content-4">
@@ -121,7 +201,7 @@
                                 </div>
                             </div>
                             <div class="text-content">
-                                <p>Our bond is something I'll always cherish. You're not just my mum — you're my best friend. We laugh together, joke together, and somehow, you never get tired of pampering me. You always say you love when I "eat your money," and trust me, that's a deal I'll never argue with.</p>
+                                <p>From roasting each other’s fits, debating whose fragrance slaps harder, teasing and provoking each other endlessly, to our random meetups at “Kadi Black’s Luxury Kitchen” 😂 — our bond is unmatched. We trash-talk, laugh, sometimes go full emotionally mature adults for 5 minutes, then jump right back to the madness. Honestly, you make every moment unpredictable and absolutely priceless.</p>
                             </div>
                         </div>
                     </div>
@@ -145,8 +225,8 @@
                                 </div>
                             </div>
                             <div class="text-content">
-                                <p>Today, I just want you to be surrounded by all the love you've given me and so many others. I pray your heart stays light, your smile never fades, and your days are filled with peace, laughter, and the delicious food you love to share.</p>
-                                <p><strong>Happy Birthday, Mum. You're my forever favorite person. ❤️</strong></p>
+                                <p>Embily, I wish you endless laughter, food that always hits the spot, and vibes that never fade. May your mood swings be cute, your drip legendary, and your Davido playlists forever loud.</p>
+                                <p><strong>Happy Birthday, Em. You’re my forever favorite person and campus legend. ❤️</strong></p>
                             </div>
                         </div>
                     </div>
@@ -156,7 +236,8 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <p>Made with love by your favorite child.</p>
+            <p>Made with love by your "Nonchalant", "Proud", and "Big man" friend😎.</p>
+            <div class="handwritten reveal">Always yours, with all the vibes.</div>
         </footer>
     </div>
 
